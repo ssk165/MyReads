@@ -25,7 +25,10 @@ class WantToRead extends Component {
                         }}
                       />
                       <div className="book-shelf-changer">
-                        <select>
+                        <select
+                          defaultValue={book.shelf}
+                          onChange={(e) => this.props.changeShelf(book, e)}
+                        >
                           <option value="move" disabled>
                             Move to...
                           </option>
