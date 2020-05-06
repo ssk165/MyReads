@@ -1,14 +1,13 @@
 import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import CurrentlyReading from "././Components/CurrentlyReading/CurrentlyReading";
-import WantToRead from "././Components/WantToRead/WantToRead";
-import Read from "././Components/Read/Read";
+import SearchPage from "././Components/SearchPage/SearchPage";
+import MainShelf from "./Components/Mainshelf/MainShelf";
+import { Switch, Route } from "react-router-dom";
 
 class BooksApp extends React.Component {
   state = {
     books: [],
-    showSearchPage: false,
   };
 
   componentDidMount() {
@@ -37,29 +36,22 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
-        <div className="list-books-content">
-          <div>
-            <CurrentlyReading
-              changeShelf={this.changeShelf}
-              currentreading={this.state.books}
-            />
-            <WantToRead
-              changeShelf={this.changeShelf}
-              wantToRead={this.state.books}
-            />
-            <Read changeShelf={this.changeShelf} read={this.state.books} />
-          </div>
-        </div>
-        <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </button>
-        </div>
-      </div>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={() => (
+            <MainShelf state={this.state} changeShelf={this.changeShelf} />
+          )}
+        />
+        <Route
+          exact
+          path="/search"
+          component={() => (
+            <SearchPage state={this.state} changeShelf={this.changeShelf} />
+          )}
+        />
+      </Switch>
     );
   }
 }
