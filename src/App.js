@@ -20,6 +20,12 @@ class BooksApp extends React.Component {
   }
 
   changeShelf = (book, e) => {
+    let newbook = true;
+    this.state.books.forEach((element) => {
+      if (element.id === book.id) {
+        newbook = false;
+      }
+    });
     if (book.shelf !== e.target.value) {
       let targetvalue = e.target.value;
       BooksAPI.update(book, e.target.value).then((result) => {
@@ -31,6 +37,10 @@ class BooksApp extends React.Component {
         });
         this.setState({ books: [...b.books] });
       });
+    }
+    if (newbook) {
+      this.setState({ books: [...this.state.books, book] });
+      console.log(this.state.books);
     }
   };
 
