@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import "../App.css";
+import "../../App.css";
 
-class CurrentlyReading extends Component {
+class Read extends Component {
   render() {
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
+        <h2 className="bookshelf-title">Read</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.props.currentreading
-              .filter((book) => book.shelf === "currentlyReading")
+            {this.props.read
+              .filter((book) => book.shelf === "read")
               .map((book, i) => (
                 <li key={i}>
                   <div className="book">
@@ -50,4 +50,4 @@ class CurrentlyReading extends Component {
   }
 }
 
-export default CurrentlyReading;
+export default Read;
